@@ -4,12 +4,13 @@
 //
 //  Created by Digant Patel on 24/03/26.
 //
-import Combine
+import Observation
 import SwiftUI
 
-class ToDoViewModel: ObservableObject {
+@Observable
+class ToDoViewModel {
     
-    @Published var toTask: [ToDoTask] = [] {
+     var toTask: [ToDoTask] = [] {
         didSet {
             saveToDo()
         }

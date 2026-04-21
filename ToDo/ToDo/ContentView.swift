@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @StateObject var viewModel = ToDoViewModel()
+    @State var viewModel = ToDoViewModel()
     @State var newTask: String = ""
     
     var body: some View {
@@ -17,12 +17,17 @@ struct ContentView: View {
         NavigationStack {
             VStack {
                 HStack {
-                    TextField("Enter a Task: ", text: $newTask)
+                    TextField("Enter a Text: ", text: $newTask)
                         .textFieldStyle(.roundedBorder)
-                    Button("Add Task") {
+                    
+                    Button("Add") {
                         guard !newTask.isEmpty else { return }
                         viewModel.addTask(newTask)
                         newTask = ""
+                    }
+                    Button("Print UserDefaults") {
+                        let dict = UserDefaults.standard.dictionaryRepresentation()
+                        print(dict)
                     }
                 }
             }
@@ -42,8 +47,8 @@ struct ContentView: View {
                 }
                 .onDelete(perform: viewModel.deleteTask)
             }
+            .navigationTitle("Notes")
         }
-        .navigationTitle("Notes")
     }
 }
 
